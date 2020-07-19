@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+
+<div class="mdui-container">
+    <form action="/register" method="post">
+        <div class="mdui-card" style="max-width: 500px; padding: 2em; margin: 100px auto">
+            <div class="mdui-card-content">
+                <h1 style="text-align:center">Register</h1>
+
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">Name</label>
+                    <input class="mdui-textfield-input" type="text" name="user[name]" required />
+                    <div class="mdui-textfield-error">Required</div>
+                </div>
+
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">Email</label>
+                    <input class="mdui-textfield-input" type="email" name="user[email]" required />
+                    <div class="mdui-textfield-error">Invalid Email Address</div>
+                </div>
+
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">Password</label>
+                    <input class="mdui-textfield-input" type="password" pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$"
+                        name="user[password]" required />
+                    <div class="mdui-textfield-error">Use 8 or more characters with a mix of letters, numbers</div>
+                    <div class="mdui-textfield-helper">Use 8 or more characters with a mix of letters, numbers</div>
+                </div>
+
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <button class="mdui-btn mdui-btn-block mdui-color-blue-accent mdui-ripple"
+                        type="submit">Login</button>
+                </div>
+                <p>Already have an account? <a href="\login">Login Now!</a></p>
+            </div>
+        </div>
+    </form>
+
+
+    <% if (messages.error) { %>
+    <%= messages.error %>
+    <% } %>
+</div>
+
+<%- include("partials/footer") %>

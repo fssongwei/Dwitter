@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css"> -->
+    <link rel="stylesheet" href="/mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/mdui/js/mdui.min.js"></script>
+    <title>Dwitter</title>
+</head>
+
+<body class="mdui-bottom-nav-fixed">
+
+    <% if (messages.error) { %>
+        <script>
+            mdui.snackbar({
+                message: '<%= messages.error %>',
+                position: 'top'
+            });
+        </script> 
+    <% }%>
+
+    <% if (messages.success) { %>
+        <script>
+            mdui.snackbar({
+                message: '<%= messages.success %>',
+                position: 'top'
+            });
+        </script> 
+    <% }%>
+
+    <div class="mdui-appbar mdui-appbar-scroll-hide">
+        <div class="mdui-toolbar mdui-color-theme">
+            <% if (user) { %>
+            <a class="un" href="/profiles/<%=user.id%>">
+                <img class="mdui-card-header-avatar" src="/img/default.png" />
+                <div class="mdui-card-header-title"><%= user.name %></div>
+                <div class="mdui-card-header-subtitle"><%= user.email %></div>
+            </a>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="/profiles/<%=user.id%>" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">settings</i></a>
+            <form action="/logout?_method=DELETE" method="post" id="#logout">
+                <button type="submit" class="fabutton"><i
+                        class="mdui-icon material-icons">power_settings_new</i></button>
+            </form>
+            <% } else {%>
+                <img style="height: 50px" src="/img/brand.png" />
+            <% } %>
+        </div>
+    </div>

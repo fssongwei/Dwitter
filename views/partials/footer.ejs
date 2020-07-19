@@ -1,0 +1,22 @@
+<% if (user) { %>
+
+<div class="mdui-container">
+    <div class="mdui-bottom-nav mdui-color-white">
+        <a href="/posts" class="mdui-ripple <% if (path === "/posts") { %> mdui-bottom-nav-active <% } %> ">
+            <i class="mdui-icon material-icons">home</i>
+            <label>All Posts</label>
+        </a>
+        <a href="/posts/following" class="mdui-ripple <% if (path === "/posts/following") { %> mdui-bottom-nav-active <% } %>">
+            <i class="mdui-icon material-icons">supervisor_account</i>
+            <label>Following</label>
+        </a>
+        <a href="/posts/favorite" class="mdui-ripple <% if (path === "/posts/favorite") { %> mdui-bottom-nav-active <% } %>">
+            <i class="mdui-icon material-icons">favorite</i>
+            <label>Favorite</label>
+        </a>
+      </div>
+</div>
+
+<% } %>
+</body>
+</html>

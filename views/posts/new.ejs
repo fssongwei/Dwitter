@@ -1,0 +1,18 @@
+<%- include("../partials/header") %>
+
+<div class="mdui-container">
+    <form action="/posts" method="POST">
+        <div class="mdui-card" style="max-width: 600px; padding: 2em; margin: 50px auto">
+            <div class="mdui-card-content">
+                <div class="mdui-textfield">
+                    <textarea class="mdui-textfield-input" rows="8" placeholder="Write something" name="text"></textarea>
+                  </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <button class="mdui-btn mdui-btn-block mdui-color-blue-accent mdui-ripple" type="submit">Post</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,173 @@
+<%- include("../partials/header") %>
+
+<% if (profileUser) { %>
+<%- include("../profiles/profile") %>
+<% } %>
+
+<% if (path === "/posts/following") { %>
+<%- include("../posts/following") %>
+<div id="tab1-content" class="mdui-p-a-2">
+    <% } %>
+
+    <!-- POSTS PART -->
+    <div class="mdui-container">
+        <% for (post of posts) { %>
+        <div class="mdui-card" style="max-width: 600px; margin: 1em auto;">
+            <!-- POST HEADER -->
+            <div class="mdui-card-header">
+                <% if (user && user.id === post.author.id) { %>
+                <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+                    <div class="mdui-chip mdui-float-right" onClick="javascript:this.parentNode.submit();"
+                        mdui-tooltip="{content: 'Delete', position: 'top'}">
+                        <span class="mdui-chip-icon  mdui-color-red"><i
+                                class="mdui-icon material-icons">clear</i></span>
+                    </div>
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                </form>
+                <% } else if (post.hasFollowed) { %>
+                <form action="/profiles/<%= post.author.id %>?_method=DELETE" method="post">
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                    <div class="mdui-chip mdui-float-right mdui-color-blue"
+                        onClick="javascript:this.parentNode.submit();">
+                        <span class="mdui-chip-title">Following</span>
+                    </div>
+                </form>
+                <% } else { %>
+                <form action="/profiles/<%= post.author.id %>" method="post">
+                    <div class="mdui-chip mdui-float-right" onClick="javascript:this.parentNode.submit();">
+                        <span class="mdui-chip-icon"><i class="mdui-icon material-icons">add</i></span>
+                        <span class="mdui-chip-title">Follow</span>
+                    </div>
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                </form>
+                <% } %>
+
+                <a class="un" href="/profiles/<%=post.author.id%>">
+                    <img class="mdui-card-header-avatar" src="/img/default.png" />
+                    <div class="mdui-card-header-title"><%= post.author.name %></div>
+                    <div class="mdui-card-header-subtitle"><%= post.author.email %></div>
+                </a>
+            </div>
+
+            <!-- POST CONTENT -->
+                <div class="mdui-card-content" style="padding-top: 0; padding-bottom: 0">
+                    <%= post.text %>
+                    <p class="mdui-text-color-black-disabled"><%= post.date.toDateString() %></p>
+                </div>
+
+            <!-- COMMENTS -->
+            <div class="mdui-collapse" mdui-collapse>
+
+                <div class="mdui-collapse-item">
+                    <div class="mdui-collapse-item-header">
+                        <div class="mdui-card-actions">
+                            <button class="mdui-btn">
+                                <i class="mdui-icon material-icons">comment</i>&nbsp;<%= post.comments.length %>
+                            </button>
+                            <% if (post.isFavorite) { %>
+                                <form action="/posts/favorite/<%= post.id %>?_method=DELETE" method="post" style="display:inline">
+                                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                                    <button class="mdui-btn">
+                                        <i class="mdui-icon material-icons mdui-text-color-red">favorite</i>
+                                    </button>
+                                </form>
+                            <% } else { %>
+                                <form action="/posts/favorite/<%= post.id %>" method="post" style="display:inline">
+                                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                                    <button class="mdui-btn">
+                                        <i class="mdui-icon material-icons mdui-text-color-blue">favorite_border</i>
+                                    </button>
+                                </form>
+                            <% } %>
+                            
+                            <button class="mdui-btn mdui-btn-icon mdui-float-right">
+                                <i class="mdui-icon material-icons">expand_more</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mdui-collapse-item-body">
+                        <!-- ADD A COMMENT -->
+                        <form action="/comments/<%= post.id %>" method="post">
+                            <div class="mdui-card-content" style="padding-top:0;">
+                                <input type="hidden" name="redirectPath" value="<%= path %>">
+                                <button type="submit" class="fabutton mdui-float-right" style="font-size: 2em">
+                                    <i class="mdui-icon material-icons">send</i>
+                                </button>
+                                <!-- <i class="mdui-icon material-icons" style="width: 2em; right: 0; position: absolute; ">send</i> -->
+                                <div class="mdui-textfield" style="margin-right: 2em; margin-left: 0; padding: 0">
+                                    <textarea class="mdui-textfield-input" name="text"
+                                        placeholder="Add a comment"></textarea>
+                                </div>
+                            </div>
+                        </form>
+
+                        <% if (post.comments.length === 0) { %>
+                        <div class="mdui-card-content">
+                            <p style="text-align: center" class="mdui-text-color-black-secondary">No one has comment
+                                yet.
+                                Why not be the first one? </p>
+                        </div>
+                        <% } %>
+
+                        <!-- SHOW ALL COMMENTS -->
+                        <% for (comment of post.comments) { %>
+                        <div class="mdui-card-content" style="padding-top: 0; padding-bottom: 0">
+                            <div class="mdui-card-content">
+                                <div class="mdui-card-header-subtitle mdui-float-right">
+                                    <%= comment.date.toDateString() %>
+                                </div>
+                                <a class="un" href="/profiles/<%=comment.author.id%>">
+                                    <img class="mdui-card-header-avatar" src="/img/default.png" />
+                                    <div class="mdui-card-header-title"><%= comment.author.name %></div>
+                                </a>
+
+                                <% if (comment.author.id === user.id) { %>
+                                <form action="/comments/<%= comment.id %>?_method=DELETE" method="post">
+                                    <input type="hidden" name="postID" value="<%= post.id %>">
+                                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                                    <button type="submit" class="fabutton mdui-float-right"
+                                        mdui-tooltip="{content: 'Delete', position: 'top'}">
+                                        <i class="mdui-icon material-icons">clear</i>
+                                    </button>
+                                </form>
+                                <% } %>
+
+                                <a class="un" href="/profiles/<%=comment.author.id%>">
+                                    <div class="mdui-card-header-subtitle"><%= comment.author.email %></div>
+                                </a>
+                                <%= comment.text %>
+                            </div>
+                        </div>
+
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <% if (posts.length === 0) { %>
+        <div class="mdui-container" style="margin-top: 100px">
+            <p style="text-align: center" class="mdui-text-color-black-secondary">Nothing yet. Try to follow someone.
+            </p>
+        </div>
+        <% } else {%>
+        <div class="mdui-container" style="margin-top: 50px">
+            <p style="text-align: center" class="mdui-text-color-black-secondary">You have reached the end.</p>
+        </div>
+        <% } %>
+        <div class="mdui-fab-wrapper" mdui-fab="{trigger: 'hover'}" id="fab" style="margin-bottom: 50px;">
+            <a href="/posts/new" class="mdui-fab mdui-ripple mdui-color-blue-accent">
+                <i class="mdui-icon material-icons">add</i>
+                <i class="mdui-icon mdui-fab-opened material-icons">mode_edit</i>
+            </a>
+        </div>
+    </div>
+
+    <% if (path === "/posts/following") { %>
+</div>
+<script>var inst = new mdui.Tab('#tab');</script>
+<% } %>
+
+<%- include("../partials/footer") %>

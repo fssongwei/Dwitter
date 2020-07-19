@@ -1,0 +1,33 @@
+
+<div class="mdui-container">
+    <div class="mdui-card" style="max-width: 600px; padding: 2em; margin: 50px auto">
+        <div class="mdui-card-content" style="text-align: center">
+            <img src="/img/default.png" style="width: 160px"/>
+            <h1 style="text-align: center"><%= profileUser.name %></h1>
+            <p style="text-align: center"><a class="un" href="mailto:<%= profileUser.email %>"><i class="mdui-icon material-icons mdui-text-color-blue">email</i> &nbsp; <%= profileUser.email %></a></p>
+
+            <% if (profileUser.id !== user.id) { %>
+                <% if (hasFollowed) { %>
+                <form action="/profiles/<%= profileUser.id %>?_method=DELETE" method="post" style="text-align: center">
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                    <div class="mdui-chip mdui-color-blue" onClick="javascript:this.parentNode.submit();">
+                        <span class="mdui-chip-title">Following</span>
+                    </div>
+                </form>
+                <% } else { %>
+                <form action="/profiles/<%= profileUser.id %>" method="post" style="text-align: center">
+                    <div class="mdui-chip" onClick="javascript:this.parentNode.submit();">
+                        <span class="mdui-chip-icon"><i class="mdui-icon material-icons">add</i></span>
+                        <span class="mdui-chip-title">Follow</span>
+                    </div>
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                </form>
+                <% } %>
+                <% } %>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- <%- include("../partials/footer") %> -->

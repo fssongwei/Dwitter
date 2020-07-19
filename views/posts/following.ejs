@@ -1,0 +1,37 @@
+<div class="mdui-tab mdui-tab-centered" id="tab" style="margin-top: 30px">
+    <a href="#tab1-content" id="tab1" class="mdui-ripple">Posts</a>
+    <a href="#tab2-content" id="tab2" class="mdui-ripple">Following</a>
+</div>
+
+<div id="tab2-content" class="mdui-p-a-2">
+
+    <div class="mudi-container" style="max-width: 600px; margin: 0 auto">
+        <% if (user.following.length > 0) { %>
+        <ul class="mdui-list">
+            <h3 style="text-align: center">Your Following</h3>
+            <% for (followUser of user.following) { %>
+            <form action="/profiles/<%= followUser._id %>?_method=DELETE" method="post">
+                <li class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-avatar"><a href="/profiles/<%= followUser._id %>"><img
+                                src="/img/default.png" /></a></div>
+                    <div class="mdui-list-item-content"><a
+                            href="/profiles/<%= followUser._id %>"><%= followUser.name %></a>
+                    </div>
+                    <div class="mdui-chip mdui-float-right mdui-color-blue"
+                        onClick="javascript:this.parentNode.parentNode.submit();">
+                        <span class="mdui-chip-title">Unfollow</span>
+                        <span class="mdui-chip-icon"><i class="mdui-icon material-icons">remove</i></span>
+                    </div>
+                    <input type="hidden" name="redirectPath" value="<%= path %>">
+                </li>
+            </form>
+            <% } %>
+        </ul>
+
+        <% } else { %>
+        <p style="text-align: center" class="mdui-text-color-black-secondary">Nothing yet. Try to follow someone.
+        <% } %>
+    </div>
+</div>
+
+<script>var inst = new mdui.Tab('#tab');</script>

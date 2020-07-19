@@ -1,0 +1,34 @@
+<div style="border: 1px solid black; padding: 1em">
+    <h3><a href="/profiles/<%=post.author.id%>"><%= post.author.name %></a></h3>
+    <p><%= post.text %></p>
+    <h5><%= post.date %></h5>
+
+    <% if (user && user.id === post.author.id) { %>
+        <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+            <button type="submit">delete</button>
+        </form>
+    <% } %>
+    
+    <hr>
+    <h3>Comments:</h3>
+    <% for (comment of post.comments) { %>
+        <p><strong><%= comment.author.name %></strong> - <%= comment.text %> ( <%= comment.date %>)
+            <% if (comment.author.id === user.id) { %>
+                <form action="/comments/<%= comment.id %>?_method=DELETE" method="post">
+                    <input type="hidden" name="postID" value="<%= post.id %>">
+                    <button type="submit">Delete</button>
+                </form>
+            <% } %>
+        </p>
+    <% } %>
+
+    
+    <% if (user) { %>
+        <hr>
+        <h3>new comment</h3>
+        <form action="/comments/<%= post.id %>" method="post">
+            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+            <button type="submit">submit</button>
+        </form>
+    <% } %>
+</div>
