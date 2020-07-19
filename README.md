@@ -1,4 +1,4 @@
-### Introduction
+## Introduction
 
 Dwitter is a Twitter-like social media web app written in Javascript. The name "Dwitter" stands for "David's Twitter". Users can post their thoughs, follow other user, comment and like other user's posts.
 
@@ -15,7 +15,7 @@ The app is built on Node.js with Express. Other technologies and library using i
 
 
 
-### Updates
+## Updates
 
 ##### 2020.7.16 Version 1.0
 
