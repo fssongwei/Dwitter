@@ -5,11 +5,6 @@ Dwitter is a Twitter-like social media web app written in Javascript. The name "
 [Live Demo](http://app.david916.com:3000)  
 [Source Code](https://github.com/fssongwei/Dwitter)
 
-<img src="https://i.loli.net/2020/07/19/t6rFGl1UMuzXiDE.png" alt="MainPage.png" style="height: 300px;" /><img src="https://i.loli.net/2020/07/19/92B5iIvxoyrCZtP.png" alt="profilePage.png" style="height: 300px;" />
-<img src="https://i.loli.net/2020/07/19/TPX9Dju47AUfFdc.png" alt="followingPage.png" style="height: 300px;" /><img src="https://i.loli.net/2020/07/19/34NcB6xySXZwfdi.png" alt="loginPage.png" style="height: 300px;" />
-
-
-
 The app is built on Node.js with Express. Other technologies and library using in this project are listing below: 
 
 **UI Library**: MDUI
@@ -57,3 +52,9 @@ Other features comming. If you have any idea, send email to ws446@cornell.edu
 3. Implement google / facebook login
 4. User can change their own avatars
 5. Routers refactor
+
+
+
+### Demo
+<img src="https://i.loli.net/2020/07/19/Fzc5LiMEWo4Z32O.png" alt="MainPage.png" style="height: 500px;" /><img src="https://i.loli.net/2020/07/19/r6ZmgcyPYRt4i89.png" alt="profilePage.png" style="height: 500px;" />
+<img src="https://i.loli.net/2020/07/19/3LxnoeavjfT89qH.png" alt="followingPage.png" style="height: 500px;" /><img src="https://i.loli.net/2020/07/19/fuabQnrldK9Pze5.png" alt="loginPage.png" style="height: 500px;" />
