@@ -1,11 +1,16 @@
-### Introduction
+## Introduction
 
 Dwitter is a Twitter-like social media web app written in Javascript. The name "Dwitter" stands for "David's Twitter". Users can post their thoughs, follow other user, comment and like other user's posts.
 
-The app is built on Node.js with Express. Other technologies and library using in this project are listing below: 
-
 [Live Demo](http://app.david916.com:3000)  
 [Source Code](https://github.com/fssongwei/Dwitter)
+
+<img src="https://i.loli.net/2020/07/19/t6rFGl1UMuzXiDE.png" alt="MainPage.png" style="height: 300px;" /><img src="https://i.loli.net/2020/07/19/92B5iIvxoyrCZtP.png" alt="profilePage.png" style="height: 300px;" />
+<img src="https://i.loli.net/2020/07/19/TPX9Dju47AUfFdc.png" alt="followingPage.png" style="height: 300px;" /><img src="https://i.loli.net/2020/07/19/34NcB6xySXZwfdi.png" alt="loginPage.png" style="height: 300px;" />
+
+
+
+The app is built on Node.js with Express. Other technologies and library using in this project are listing below: 
 
 **UI Library**: MDUI
 
@@ -15,7 +20,7 @@ The app is built on Node.js with Express. Other technologies and library using i
 
 
 
-### Updates
+## Updates
 
 ##### 2020.7.16 Version 1.0
 
